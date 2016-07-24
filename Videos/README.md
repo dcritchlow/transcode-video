@@ -1,0 +1,1 @@
+This folder is the folder that you want to give the MakeMKV program for the location it puts the .mkv video file to.

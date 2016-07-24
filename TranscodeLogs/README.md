@@ -1,0 +1,1 @@
+This is where the logs from transcoding the videos will be. These logs are created from handbrake and can give useful information. Go to this [link](https://github.com/donmelton/video_transcoding#using-query-handbrake-log) for the list of commands available.
