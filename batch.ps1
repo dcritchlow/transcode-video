@@ -67,6 +67,9 @@ Function Start-VideoProcess {
     Try {
 
         $lines = Get-VideoQueue
+
+        # Change file name that handbrake provides eg. title00.mkv to the video title eg. DeadPool (2016).mkv
+        Rename-HandbrakeFile($lines)
         
         foreach($line in $lines) {
 
@@ -75,7 +78,7 @@ Function Start-VideoProcess {
 
             $cropOption = Get-CropFile($line)
 
-            # Create Directory for movie file
+            # Create Directory in Completed directory for new transcoded movie file
             Add-MovieDirectory($line)
             
             # Build Command
@@ -106,6 +109,32 @@ Function Start-VideoProcess {
     If ($?) {
       Write-Host 'Completed video transcoding.'
       Write-Host ' '
+    }
+  }
+}
+
+Function Rename-HandbrakeFile {
+  Param ([String[]] $lines)
+  Begin {
+    Write-Host 'Renaming handbrake filename to same name as folder...'
+  }
+  Process {
+    Try {
+      foreach ($line in $lines) {
+        $videoName = Get-ChildItem "$videoLocation\$line" -Filter "*.mkv"
+        Rename-Item "$videoLocation\$line\$videoName" "$videoLocation\$line\$line.mkv"
+      }
+    }
+    Catch {
+      Write-Host -BackgroundColor Red "Error: $($_.Exception)"
+      Break
+    }
+  }
+  End {
+    If ($?) {
+      Write-Host 'Completed renaming handbrake file.'
+      Write-Host ' '
+      Return $lines
     }
   }
 }
