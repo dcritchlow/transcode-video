@@ -74,8 +74,10 @@ Function Start-VideoProcess {
         foreach($line in $lines) {
 
             $video = "$videoLocation\$line\$line.mkv"
-            Write-Host $video
-
+            
+            # Create crop file with value
+            Write-CropFileValue $video $line
+            
             $cropOption = Get-CropFile($line)
 
             # Create Directory in Completed directory for new transcoded movie file
@@ -89,6 +91,9 @@ Function Start-VideoProcess {
 
             # Move log file to logs directory
             mv "$completed\$line\$line.mp4.log" $logs
+
+            # Remove crop file
+            Remove-Item "$crops\$line.txt"
 
             #Deletes original .mkv file
             If ( $DeleteFile -eq $True ) {
@@ -134,7 +139,30 @@ Function Rename-HandbrakeFile {
     If ($?) {
       Write-Host 'Completed renaming handbrake file.'
       Write-Host ' '
-      Return $lines
+    }
+  }
+}
+
+Function Write-CropFileValue {
+  Param ([String] $video, [String] $line)
+  Begin {
+    Write-Host 'Creating crop file with crop value...'
+  }
+  Process {
+    Try {
+      $string = iex "detect-crop.bat '$video'"
+      $crop = $string | Where-Object {$_ -match "--crop\s(\d+:\d+:\d+:\d+)"} | Foreach {$Matches[1]}
+      ni "$crops\$line.txt" -type file -force -value $crop
+    }
+    Catch {
+      Write-Host -BackgroundColor Red "Error: $($_.Exception)"
+      Break
+    }
+  }
+  End {
+    If ($?) {
+      Write-Host 'Completed creating crop file and crop value.'
+      Write-Host ' '
     }
   }
 }
