@@ -4,6 +4,9 @@ This uses the ruby scripts from this GitHub [project](https://github.com/donmelt
 ## Install Ruby Windows
 First install ruby from [RubyInstaller](http://rubyinstaller.org/).
 
+## Install HandBrake CLI (Command Line Interface)
+Go to [downloads](https://handbrake.fr/downloads2.php) and download the appropriate file for your machine and install.
+
 ## Install Ruby gem
 ```gem install video_transcoding```
 
