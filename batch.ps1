@@ -16,6 +16,16 @@
   Author:         Darin Critchlow
   Creation Date:  07/20/2016
   Purpose/Change: Initial script development
+
+  Version:        1.1
+  Author:         Darin Critchlow
+  Creation Date:  07/28/2016
+  Purpose/Change: Add Rename-HandbrakeFile function
+
+  Version:        1.2
+  Author:         Darin Critchlow
+  Creation Date:  07/29/2016
+  Purpose/Change: Add Write-CropFileValue function
 .EXAMPLE
   ./batch.ps1
 
