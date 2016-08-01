@@ -10,7 +10,28 @@ Go to [downloads](https://handbrake.fr/downloads2.php) and download the appropri
 ## Install Ruby gem
 ```gem install video_transcoding```
 
-I use [MakeMKV](http://makemkv.com/) to save the video file containing the feature film and save it to the Videos directory. For the name of the video file I use a quick google search to imdb, Deadpool imdb, for the name of the movie and the year eg. Deadpool (2016) and I change the MakeMKV default from Title00 to Deadpool (2016). I then put Deadpool (2016) in the queue.txt file for the batch processing script to use.
+I use [MakeMKV](http://makemkv.com/) to save the video file containing the feature film and save it to the Videos directory. 
+For the name of the video directory I use a quick google search to imdb, Deadpool imdb, for the name of the movie and the year eg. Deadpool (2016).
+```
+│   batch.ps1
+│   queue.txt
+│   README.md
+│
+├───Crops
+│       README.md
+│
+├───TranscodeLogs
+│       README.md
+│
+└───Videos
+    │   README.md
+    │
+    └───DeadPool (2016)
+            Title00.mkv
+``` 
+I then put Deadpool (2016) in the queue.txt file for the batch processing script to use.
+
+![Example Screenshot](/../screenshots/transcode-example-screenshot.png?raw=true "Example queue.txt file")
 
 # Here is the display from ```Get-Help -Full .\batch.ps1``` in PowerShell:
 ```
